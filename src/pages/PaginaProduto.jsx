@@ -1,7 +1,11 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router'
 
-export default function PaginaProduto({ produtos, onAdicionar }) {
+export default function PaginaProduto({ produtos, onAdicionar, onSolicitarAviso }) {
   const { id } = useParams()
+  const [nomeAviso, setNomeAviso] = useState('')
+  const [emailAviso, setEmailAviso] = useState('')
+  const [mensagemAviso, setMensagemAviso] = useState('')
   const produto = produtos.find((item) => item.id === id)
 
   if (!produto) {
@@ -16,8 +20,31 @@ export default function PaginaProduto({ produtos, onAdicionar }) {
   }
 
   const relacionados = produtos
-    .filter((item) => item.category === produto.category && item.id !== produto.id)
+    .filter(
+      (item) =>
+        item.category === produto.category &&
+        item.id !== produto.id &&
+        item.estoque > 0 &&
+        item.price !== null &&
+        item.price !== undefined
+    )
     .slice(0, 4)
+
+  function enviarSolicitacaoAviso(evento) {
+    evento.preventDefault()
+
+    const envioOk = onSolicitarAviso(produto.id, nomeAviso, emailAviso)
+    if (envioOk) {
+      setMensagemAviso('Você será avisado quando o produto voltar ao estoque.')
+      setNomeAviso('')
+      setEmailAviso('')
+      return
+    }
+
+    setMensagemAviso('Preencha nome e e-mail para receber o aviso.')
+  }
+
+  const precoProduto = produto.price ?? 0
 
   return (
     <section>
@@ -37,17 +64,55 @@ export default function PaginaProduto({ produtos, onAdicionar }) {
           <p className="card-avaliacao">
             ★ {produto.rating.rate} <span>({produto.rating.count} avaliações)</span>
           </p>
-          <p className="detalhe-preco">R$ {produto.price.toFixed(2).replace('.', ',')}</p>
+          <p className="detalhe-preco">
+            {produto.price === null || produto.price === undefined
+              ? 'Preço em atualização'
+              : `R$ ${precoProduto.toFixed(2).replace('.', ',')}`}
+          </p>
           <p className="detalhe-descricao">{produto.description}</p>
-          <p className="detalhe-estoque">{produto.estoque} unidades disponíveis</p>
+          <p className="detalhe-estoque">
+            {produto.price === null || produto.price === undefined
+              ? 'Produto aguardando definição de preço'
+              : `${produto.estoque} unidades disponíveis`}
+          </p>
 
-          <button
-            className="botao botao-grande"
-            onClick={() => onAdicionar(produto)}
-            disabled={produto.estoque === 0}
-          >
-            Adicionar ao carrinho
-          </button>
+          {produto.estoque === 0 ? (
+            <form onSubmit={enviarSolicitacaoAviso} className="form-aviso">
+              <p className="aviso aviso-erro">Produto esgotado.</p>
+              <label>
+                Nome
+                <input
+                  type="text"
+                  value={nomeAviso}
+                  onChange={(evento) => setNomeAviso(evento.target.value)}
+                  placeholder="Seu nome"
+                />
+              </label>
+              <label>
+                E-mail
+                <input
+                  type="email"
+                  value={emailAviso}
+                  onChange={(evento) => setEmailAviso(evento.target.value)}
+                  placeholder="seu@email.com"
+                />
+              </label>
+              <button type="submit" className="botao botao-grande">
+                Me avise quando voltar
+              </button>
+              {mensagemAviso && <p className="mensagem-cupom">{mensagemAviso}</p>}
+            </form>
+          ) : produto.price === null || produto.price === undefined ? (
+            <p className="aviso aviso-erro">Este produto não pode ser vendido até que o preço seja definido.</p>
+          ) : (
+            <button
+              className="botao botao-grande"
+              onClick={() => onAdicionar(produto)}
+              disabled={produto.estoque === 0}
+            >
+              Adicionar ao carrinho
+            </button>
+          )}
 
           <ul className="detalhe-garantias">
             <li>Troca grátis em até 30 dias</li>

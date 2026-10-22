@@ -49,16 +49,6 @@ Você assumiu a manutenção da TechStore, uma loja virtual em React que já est
 
 > Recebemos várias reclamações de que o botão de adicionar ao carrinho não funciona. Uma cliente disse que clicou e nada aconteceu, então clicou de novo, e de novo. Quando foi pagar, tinha 5 unidades da mesma camiseta no carrinho.
 
-### B. Cupom de primeira compra
-
-**Mensagem do dono da loja, 9 de outubro**
-
-> Vários clientes estão reclamando que o cupom PRIMEIRACOMPRA não funciona. Tem cliente dizendo que vai desistir da compra. Resolvam isso hoje.
-
-**Mensagem do financeiro, 9 de outubro**
-
-> Conferindo os pedidos de setembro, encontramos compras com o desconto de primeira compra feitas por clientes que já compravam com a gente. Uma delas foi da Mariana Costa, cliente desde o ano passado. Ela contou que montou o carrinho junto com o filho, no computador de casa.
-
 ---
 
 ## Grupo 2 (escolha 1)
@@ -69,12 +59,5 @@ Você assumiu a manutenção da TechStore, uma loja virtual em React que já est
 
 > Quero uma página só para mim, com acesso pelo menu, para acompanhar a loja. Preciso saber quanto dinheiro tenho parado em estoque em cada categoria, ou seja, quanto eu receberia se vendesse tudo hoje. Quero ver também o que está parado esperando o preço do time de suprimentos e quantos clientes estão esperando produtos esgotados voltarem. E quero ver quanto estou lucrando em cada categoria. Ah, e quero que a página tenha a cara da loja.
 
-### D. Card de produto
 
-**Mensagem do time de produto, 10 de outubro**
 
-> Os clientes estão confusos. O mesmo produto aparece de um jeito na lista, de outro em "Produtos relacionados" e de outro em "Você também pode gostar", no carrinho, e em alguns lugares nem dá para abrir o produto. Queremos que o card seja igual em todos os lugares, no padrão da lista.
-
-**Mensagem do marketing, 10 de outubro**
-
-> A campanha de frete grátis mudou: agora vale para compras acima de R$ 200 no valor final. Já recebemos reclamação de cliente que comprou uma camiseta achando que o frete era grátis. Queremos que o cliente saiba quanto falta para ganhar o frete.

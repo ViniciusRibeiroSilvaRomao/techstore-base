@@ -5,7 +5,14 @@ import { agruparItens, calcularTotal } from '../utils/carrinho'
 import { validarCupom } from '../utils/cupons'
 import { formatarPreco } from '../utils/formatarPreco'
 
-export default function Carrinho({ carrinho, produtos, clienteAtual, onAdicionar, onRemover }) {
+export default function Carrinho({
+  carrinho,
+  produtos,
+  clienteAtual,
+  onAdicionar,
+  onRemover,
+  onRemoverTodos,
+}) {
   const [codigoCupom, setCodigoCupom] = useState('')
   const [cupomAplicado, setCupomAplicado] = useState(null)
   const [mensagemCupom, setMensagemCupom] = useState('')
@@ -58,11 +65,34 @@ export default function Carrinho({ carrinho, produtos, clienteAtual, onAdicionar
               </div>
               <div className="item-info">
                 <p className="item-titulo">{item.produto.title}</p>
-                <p className="item-preco">R$ {item.produto.price}</p>
+                <p className="item-preco">{formatarPreco(item.produto.price)}</p>
               </div>
-              <span className="item-quantidade">{item.quantidade} un.</span>
-              <button className="botao-texto" onClick={() => onRemover(item.produto.id)}>
-                Remover 1
+
+              <div className="item-controle-quantidade">
+                <button
+                  className="botao-texto"
+                  onClick={() => onRemover(item.produto.id)}
+                  aria-label={`Diminuir quantidade de ${item.produto.title}`}
+                >
+                  −
+                </button>
+                <span className="item-quantidade">{item.quantidade}</span>
+                <button
+                  className="botao-texto"
+                  onClick={() => onAdicionar(item.produto)}
+                  disabled={item.quantidade >= item.produto.estoque}
+                  aria-label={`Aumentar quantidade de ${item.produto.title}`}
+                >
+                  +
+                </button>
+              </div>
+
+              <button
+                className="botao-texto"
+                onClick={() => onRemoverTodos(item.produto.id)}
+                aria-label={`Remover ${item.produto.title} do carrinho`}
+              >
+                Remover
               </button>
             </li>
           ))}

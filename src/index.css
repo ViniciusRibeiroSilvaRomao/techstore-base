@@ -395,7 +395,7 @@ h2 {
   font-size: 0.85rem;
 }
 
-.preco-original + .preco {
+.preco-original+.preco {
   color: var(--cor-destaque);
 }
 
@@ -622,7 +622,7 @@ h2 {
   padding: var(--espaco-4);
 }
 
-.item-carrinho + .item-carrinho {
+.item-carrinho+.item-carrinho {
   border-top: 1px solid var(--cor-borda);
 }
 
@@ -821,6 +821,126 @@ h2 {
 
 .tabela tbody tr:last-child td {
   border-bottom: none;
+}
+
+/* Painel do lojista */
+
+.painel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaco-4);
+  margin: var(--espaco-6) 0;
+}
+
+.card-metrica {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: var(--espaco-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+}
+
+.card-metrica small {
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.card-metrica strong {
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  letter-spacing: -0.03em;
+}
+
+.painel-secoes {
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+.painel-bloco {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: var(--espaco-5);
+}
+
+.painel-bloco h2 {
+  margin-top: 0;
+}
+
+.painel-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.painel-tabela th,
+.painel-tabela td {
+  text-align: left;
+  padding: var(--espaco-3) var(--espaco-4);
+  border-bottom: 1px solid var(--cor-borda);
+  white-space: nowrap;
+}
+
+.painel-tabela th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+  background: var(--cor-fundo);
+}
+
+.painel-tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.categoria-nome {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--espaco-1) var(--espaco-2);
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-moldura);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.painel-valor-positivo {
+  color: var(--cor-frete);
+  font-weight: 700;
+}
+
+.painel-valor-negativo {
+  color: var(--cor-erro);
+  font-weight: 700;
+}
+
+.painel-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--espaco-3);
+}
+
+.painel-lista li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-fundo);
+}
+
+.painel-lista strong {
+  font-size: 0.95rem;
+}
+
+.painel-lista span {
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
 }
 
 /* Rodapé */

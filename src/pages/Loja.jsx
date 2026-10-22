@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import ProdutoCard from '../components/ProdutoCard'
 
 const CATEGORIAS = [
@@ -11,15 +11,19 @@ const CATEGORIAS = [
 
 export default function Loja({ produtos, onAdicionar }) {
   const [categoria, setCategoria] = useState('todas')
-  const [produtosVisiveis, setProdutosVisiveis] = useState(produtos)
 
-  useEffect(() => {
+  const produtosDisponiveis = useMemo(
+    () => produtos.filter((produto) => produto.estoque > 0 && produto.price !== null && produto.price !== undefined),
+    [produtos]
+  )
+
+  const produtosVisiveis = useMemo(() => {
     if (categoria === 'todas') {
-      setProdutosVisiveis(produtos)
-    } else {
-      setProdutosVisiveis(produtos.filter((produto) => produto.category === categoria))
+      return produtosDisponiveis
     }
-  }, [categoria, produtos])
+
+    return produtosDisponiveis.filter((produto) => produto.category === categoria)
+  }, [categoria, produtosDisponiveis])
 
   return (
     <section>
